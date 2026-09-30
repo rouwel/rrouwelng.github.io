@@ -227,11 +227,7 @@
                 </div>
 
                 <!-- CRT Control Options -->
-                <div class="flex items-center space-x-2">
-                    <button id="toggle-crt" class="font-code text-[11px] bg-[#21262d] hover:bg-[#30363d] border border-[#30363d] text-gray-300 hover:text-green-accent px-2 py-0.5 rounded">
-                        CRT: ON
-                    </button>
-                </div>
+
             </div>
 
             <!-- Navigation Bar -->
@@ -269,11 +265,24 @@
                     <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-start bg-[#161b22]/70 p-4 sm:p-5 border border-[#30363d] rounded">
                         <!-- Rouwel's Portrait Photo inside CRT Monitor Layout -->
                         <div class="md:col-span-4 flex flex-col items-center justify-center">
-                            <div class="relative p-1.5 bg-[#0d1117] border-2 border-green-500 rounded shadow-[0_0_15px_rgba(63,185,80,0.25)] w-full max-w-[210px]">
+                            <div class="relative p-1.5 bg-[#0d1117] border-2 border-green-500 rounded shadow-[0_0_15px_rgba(63,185,80,0.25)] w-full max-w-[210px] group">
 
-                                <!-- Portrait Photo -->
-                                <div class="relative w-full h-52 bg-[#12161f] border border-[#21262d] rounded overflow-hidden flex items-center justify-center">
-                                    <img src="Rouwel Mwangu.JPG" alt="Rouwel Mwangu" class="w-full h-full object-cover object-top" />
+                                <!-- Container for Image display -->
+                                <div id="avatar-container" class="relative w-full h-52 bg-[#12161f] border border-[#21262d] rounded overflow-hidden flex items-center justify-center cursor-pointer" onclick="document.getElementById('photo-upload').click()">
+
+
+                                    <!-- Uploaded Custom Image Container -->
+                                    <img id="user-portrait-img" src="Rouwel MWangu.JPG" alt="Rouwel Mwangu" class="hidden w-full h-full object-cover object-top" />
+
+                                    <!-- Hover Overlay Prompt -->
+                                    <div class="absolute inset-0 bg-black/70 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity text-center p-2">
+
+                                    </div>
+                                </div>
+
+                                <!-- Hidden File Input -->
+                                <!-- Label Below Image -->
+                                <div class="mt-2 flex items-center justify-between bg-green-500/10 border border-green-500/40 text-green-accent text-[11px] font-pixel-heading py-1 px-2">
                                 </div>
                             </div>
                         </div>
@@ -287,7 +296,7 @@
                                 Software Development &amp; DevSecOps Apprentice
                             </p>
                             <p class="text-gray-200 leading-relaxed text-sm sm:text-base">
-                                Building resilient full-stack platforms with <span class="text-cyan font-semibold">Go</span>, <span class="text-amber font-semibold">Python</span>, and <span class="text-green-accent font-semibold">Django</span>. Based in Kenya.
+                                Building resilient full-stack platforms with frameworks in languages such as<span class="text-cyan font-semibold">Go (Fiber, Gin)</span> and <span class="text-amber font-semibold">Python (Django/ FastAPI).</span>. Based in Kenya.
                             </p>
 
                             <div class="pt-3 border-t border-[#21262d] text-xs sm:text-sm text-gray-300 space-y-2">
@@ -305,7 +314,7 @@
                                 </div>
                                 <div class="flex items-start space-x-2">
                                     <span class="text-purple font-bold">&gt;</span>
-                                    <span><strong>Interests:</strong> Open source, technical writing, football, video games.</span>
+                                    <span><strong>Interests:</strong> Contributing to open source, technical writing, playing and watching football, playing video games.</span>
                                 </div>
                             </div>
                         </div>
@@ -322,12 +331,12 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div class="p-3.5 border border-[#30363d] bg-[#161b22]/50 rounded">
                             <div class="text-amber font-bold text-xs uppercase mb-1.5">languages/</div>
-                            <p class="text-gray-200 text-sm">C, TypeScript, Go, Python, SQL, HTML5, CSS3, JavaScript</p>
+                            <p class="text-gray-200 text-sm">Python, Go ,C , SQL, HTML5, CSS3, JavaScript, TypeScript</p>
                         </div>
 
                         <div class="p-3.5 border border-[#30363d] bg-[#161b22]/50 rounded">
                             <div class="text-green-accent font-bold text-xs uppercase mb-1.5">backend/</div>
-                            <p class="text-gray-200 text-sm">Django, FastAPI, Go net/http, gorilla/mux, Fiber, REST APIs, JWT, gunicorn, web3</p>
+                            <p class="text-gray-200 text-sm">Django, FastAPI, Go net/http, gorilla/mux, Fiber, REST APIs, JWT, gunicorn, web3, Gin</p>
                         </div>
 
                         <div class="p-3.5 border border-[#30363d] bg-[#161b22]/50 rounded">
@@ -352,7 +361,7 @@
 
                         <div class="p-3.5 border border-[#30363d] bg-[#161b22]/50 rounded md:col-span-2">
                             <div class="text-cyan font-bold text-xs uppercase mb-1.5">blockchain/</div>
-                            <p class="text-gray-200 text-sm">VeChain, Lightning Network (LNbits)</p>
+                            <p class="text-gray-200 text-sm">VeChain, Lightning Network (LNbits), Bitcoin</p>
                         </div>
                     </div>
                 </section>
@@ -621,6 +630,22 @@
     </div>
 
     <script>
+        // Image Upload Handler
+
+        // Load saved image on startup if available
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedImg = localStorage.getItem('rouwel_portfolio_avatar');
+            if (savedImg) {
+                const img = document.getElementById('user-portrait-img');
+                const svgAvatar = document.getElementById('default-svg-avatar');
+                if (img) {
+                    img.src = savedImg;
+                    img.classList.remove('hidden');
+                    if (svgAvatar) svgAvatar.classList.add('hidden');
+                }
+            }
+        });
+
         function scrollToSection(id) {
             const el = document.getElementById(id);
             if (el) {
