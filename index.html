@@ -269,24 +269,15 @@
                     <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-start bg-[#161b22]/70 p-4 sm:p-5 border border-[#30363d] rounded">
                         <!-- Rouwel's Portrait Photo inside CRT Monitor Layout -->
                         <div class="md:col-span-4 flex flex-col items-center justify-center">
-                            <div class="relative p-1.5 bg-[#0d1117] border-2 border-green-500 rounded shadow-[0_0_15px_rgba(63,185,80,0.25)] w-full max-w-[210px] group">
+                            <div class="relative p-1.5 bg-[#0d1117] border-2 border-green-500 rounded shadow-[0_0_15px_rgba(63,185,80,0.25)] w-full max-w-[210px]">
 
-                                <!-- Container for Image display -->
-                                <div id="avatar-container" class="relative w-full h-52 bg-[#12161f] border border-[#21262d] rounded overflow-hidden flex items-center justify-center cursor-pointer" onclick="document.getElementById('photo-upload').click()">
-
-
-                                    <!-- Uploaded Custom Image Container -->
-                                    <img id="user-portrait-img" src="Rouwel MWangu.JPG" alt="Rouwel Mwangu" class="hidden w-full h-full object-cover object-top" />
-
-                                    <!-- Hover Overlay Prompt -->
-                                    <div class="absolute inset-0 bg-black/70 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity text-center p-2">
-
-                                    </div>
+                                <!-- Portrait Photo -->
+                                <div class="relative w-full h-52 bg-[#12161f] border border-[#21262d] rounded overflow-hidden flex items-center justify-center">
+                                    <img src="Rouwel Mwangu.JPG" alt="Rouwel Mwangu" class="w-full h-full object-cover object-top" />
                                 </div>
-
-                                <!-- Hidden File Input -->
                                 <!-- Label Below Image -->
-                                <div class="mt-2 flex items-center justify-between bg-green-500/10 border border-green-500/40 text-green-accent text-[11px] font-pixel-heading py-1 px-2">
+                                <div class="mt-2 flex items-center justify-center bg-green-500/10 border border-green-500/40 text-green-accent text-[11px] font-pixel-heading py-1 px-2">
+                                    <span>Rouwel Mwangu.JPG</span>
                                 </div>
                             </div>
                         </div>
@@ -634,22 +625,6 @@
     </div>
 
     <script>
-        // Image Upload Handler
-
-        // Load saved image on startup if available
-        window.addEventListener('DOMContentLoaded', () => {
-            const savedImg = localStorage.getItem('rouwel_portfolio_avatar');
-            if (savedImg) {
-                const img = document.getElementById('user-portrait-img');
-                const svgAvatar = document.getElementById('default-svg-avatar');
-                if (img) {
-                    img.src = savedImg;
-                    img.classList.remove('hidden');
-                    if (svgAvatar) svgAvatar.classList.add('hidden');
-                }
-            }
-        });
-
         function scrollToSection(id) {
             const el = document.getElementById(id);
             if (el) {
